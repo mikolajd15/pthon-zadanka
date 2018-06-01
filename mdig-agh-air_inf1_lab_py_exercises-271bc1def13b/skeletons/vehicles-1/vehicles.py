@@ -24,8 +24,13 @@ V = TypeVar('V', bound = Vehicle)
 
 def vehicle_collection_as_string(vehicles: Container[V]) -> str:
 
+    list=''
     for v in vehicles:
-        print(v.__str__())
+        list=list+v.__str__()+'\n'
+
+    return list.rstrip()
+
+
 
 
 class Car (Vehicle):
