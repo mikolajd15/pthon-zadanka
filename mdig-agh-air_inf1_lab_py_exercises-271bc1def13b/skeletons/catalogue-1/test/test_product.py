@@ -26,5 +26,15 @@ class TestProduct(unittest.TestCase):
         product = Product(id_="RB01", name="Robot", price=200)
         self.assertEqual(100, product.price)
 
+    def test_generate_id(self):
+        self.assertEqual("X1_2", Product.generate_id("X1"))
+        self.assertEqual("AB_3", Product.generate_id("A B"))
+
+    def test_init_no_id(self):
+        product = Product(id_=None, name="Robot", price=10.2)
+        self.assertEqual("Robot_5", product.id)
+        self.assertEqual("Robot", product.name)
+        self.assertEqual(10.2, product.price)
+
 if __name__ == '__main__':
     unittest.main()

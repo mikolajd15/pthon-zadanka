@@ -59,5 +59,7 @@ class TestCatalogueFiltering(unittest.TestCase):
         self.assertDictEqual(c.inventory, filtered_products)
 
 
+
+
 if __name__ == '__main__':
     unittest.main()

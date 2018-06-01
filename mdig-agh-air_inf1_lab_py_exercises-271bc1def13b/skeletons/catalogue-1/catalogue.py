@@ -3,11 +3,20 @@ import copy
 
 class Product:
 
+    @classmethod
+    def generate_id(cls, name: str) -> str:
+        new_id = "{old_id}_{char_number}".format(old_id=name.replace(" ", ""), char_number=str(len(name)))
+        return new_id
 
     def __init__(self, id_: str, name: str, price: float) -> None:
-        self.id=id_
-        self.name=name
+
+        if id_!=None:
+            self.id=id_
+        else:
+            self.id=Product.generate_id(name)
         self.price=price
+        self.name=name
+
 
     @property
     def price(self):
@@ -18,6 +27,10 @@ class Product:
         if value >100:
             value=100
         self._price=value
+
+
+
+
 
     def __str__(self) -> str:
         return "{name} [{id}] : ${price:.2f}".format(name=self.name, id=self.id, price=self.price)
@@ -45,9 +58,9 @@ class Catalogue:
 
     def add_product(self, product: Product)->None:
         if(self.inventory==None):
-            self.inventory={product.id : product}
+            self.inventory={product.id : copy.deepcopy(product)}
         else:
-            self.inventory[product.id] = copy(product)
+            self.inventory[product.id] = copy.deepcopy(product)
 
     def get_products_with_appropriate_price(self, predicate)->dict:
 
