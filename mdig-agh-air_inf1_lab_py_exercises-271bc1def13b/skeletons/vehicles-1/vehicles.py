@@ -2,12 +2,20 @@ from typing import TypeVar, Container
 from abc import ABC, abstractmethod
 
 class Movable:
-    # TODO: zaimplementuj...
-    pass
+    def __init__(self, x:float=0, y:float=0)->None:
+        self.x=x
+        self.y=y
+
+    def move (self, dx:float, dy:float)->None:
+        self.x+=dx
+        self.y+=dy
 
 
-class Vehicle (ABC):
-    def __init__(self, id_ : str, brand : str) -> None:
+
+
+class Vehicle (ABC, Movable):
+    def __init__(self, id_ : str, brand : str, **kwargs) -> None:
+        super().__init__(**kwargs)
         self.id=id_
         self.brand=brand
 

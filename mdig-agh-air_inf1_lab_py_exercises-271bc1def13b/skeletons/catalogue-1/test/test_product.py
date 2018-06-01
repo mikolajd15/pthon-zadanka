@@ -22,6 +22,9 @@ class TestProduct(unittest.TestCase):
         self.assertEqual(Product(id_="P1", name="", price=0), Product(id_="P1", name="", price=0))
         self.assertNotEqual(Product(id_="P1", name="X", price=0), Product(id_="P1", name="", price=0))
 
+    def test_too_high_price(self):
+        product = Product(id_="RB01", name="Robot", price=200)
+        self.assertEqual(100, product.price)
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,13 +2,22 @@ from typing import Mapping
 import copy
 
 class Product:
-    # TODO: zaimplementuj...
+
 
     def __init__(self, id_: str, name: str, price: float) -> None:
         self.id=id_
         self.name=name
         self.price=price
 
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self,value):
+        if value >100:
+            value=100
+        self._price=value
 
     def __str__(self) -> str:
         return "{name} [{id}] : ${price:.2f}".format(name=self.name, id=self.id, price=self.price)
@@ -22,7 +31,6 @@ class Product:
 
 
 class Catalogue:
-    # TODO: zaimplementuj...
 
     Inventory = Mapping[str, Product]
 
@@ -40,3 +48,9 @@ class Catalogue:
             self.inventory={product.id : product}
         else:
             self.inventory[product.id] = product
+
+    def get_products_with_appropriate_price(self, predicate)->dict:
+
+        filtered = {obj.id : obj for obj in self.inventory.values() if predicate}
+
+        return filtered
