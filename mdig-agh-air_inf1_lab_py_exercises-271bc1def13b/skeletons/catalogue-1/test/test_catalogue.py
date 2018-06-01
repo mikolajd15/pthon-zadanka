@@ -18,7 +18,7 @@ class TestCatalogue(unittest.TestCase):
         c.add_product(p)
         p.name = "Y"
 
-        self.assertEqual("Y", c.inventory["P"].name)
+        self.assertEqual("X", c.inventory["P"].name)
 
     def test_contains_key_is_not_present(self):
         c = Catalogue()

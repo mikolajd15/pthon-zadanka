@@ -47,10 +47,18 @@ class Catalogue:
         if(self.inventory==None):
             self.inventory={product.id : product}
         else:
-            self.inventory[product.id] = product
+            self.inventory[product.id] = copy(product)
 
     def get_products_with_appropriate_price(self, predicate)->dict:
 
-        filtered = {obj.id : obj for obj in self.inventory.values() if predicate}
+        filtered = {obj.id : obj for obj in self.inventory.values() if predicate(obj.price)}
 
+        return filtered
+
+    def get_products_by_name_part(self, substr: str, ignore_case: bool=False)->dict:
+
+        if ignore_case==True:
+            filtered = {obj.id: obj for obj in self.inventory.values() if str.lower(substr) in str.lower(obj.name)}
+        else:
+            filtered = {obj.id: obj for obj in self.inventory.values() if substr in obj.name}
         return filtered
