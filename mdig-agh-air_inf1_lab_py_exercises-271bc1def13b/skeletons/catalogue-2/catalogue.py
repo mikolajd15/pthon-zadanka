@@ -5,7 +5,10 @@ from copy import copy, deepcopy
 class Product:
     def __init__(self, id_: Union[str, None], name: str, price: float) -> None:
         self.id = id_ if id_ is not None else self.generate_id(name)
-        self.name = name
+        if len(name)>20:
+            raise ValueError('Name too long ({n_chars) chars)'.format(n_chars=len(name)))
+        else:
+            self.name = name
         self.price = price
 
     @property
@@ -16,7 +19,6 @@ class Product:
     def price(self, price: float) -> None:
         self.__price = min([price, 100])
 
-    # TODO: zaimplementuj...
 
     def __str__(self) -> str:
         return '{self.name} [{self.id}] : ${self.price:.2f}'.format(self=self)
@@ -41,6 +43,7 @@ class Catalogue:
         self.inventory[product.id] = copy(product)
 
     # TODO: zaimplementuj...
+
 
     def __contains__(self, id_: str) -> bool:
         return id_ in self.inventory
