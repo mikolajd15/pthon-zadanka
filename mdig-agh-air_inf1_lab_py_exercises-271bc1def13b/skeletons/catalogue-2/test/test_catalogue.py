@@ -42,6 +42,16 @@ class TestCatalogue(unittest.TestCase):
         with self.assertRaises(InventoryOverflowException):
             c.add_product(p3)
 
+
+    def test_inventory_overflow_init (self):
+        p1 = Product(id_="P1", name="", price=0)
+        p2 = Product(id_="P2", name="", price=0)
+        p3 = Product(id_="P3", name="", price=0)
+        big_inventory={"1":p1, "2":p2, "3":p3}
+        with self.assertRaises(InventoryOverflowException):
+            c = Catalogue(big_inventory)
+
+
     def test_add_too_many_products_in_a_batch(self):
         p1 = Product(id_="P1", name="", price=0)
         p2 = Product(id_="P2", name="", price=0)

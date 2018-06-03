@@ -33,16 +33,38 @@ class Product:
         return ''.join([c for c in name if c != ' ']) + '_' + str(len(name))
 
 
+class InventoryOverflowException(Exception):
+    """More than 2 products in the inventory"""
+
+
 class Catalogue:
     Inventory = Mapping[str, Product]
 
     def __init__(self, inventory: Inventory = None) -> None:
-        self.inventory = deepcopy(inventory) if inventory else {}
+        if inventory!=None and len(inventory)>2:
+            raise InventoryOverflowException
+        else:
+            self.inventory = deepcopy(inventory) if inventory else {}
+
 
     def add_product(self, product: Product) -> None:
-        self.inventory[product.id] = copy(product)
+        if len(self.inventory)>=2:
+            raise InventoryOverflowException
+        else:
+            self.inventory[product.id] = copy(product)
 
-    # TODO: zaimplementuj...
+
+    def add_products(self, products: Product) -> None:
+        added=0
+        for prd in products:
+            try:
+                self.add_product(prd)
+                added+=1
+            except (InventoryOverflowException):
+                print("Error when adding product: " + str(prd) + "\n" + "Reason: inventory overflow")
+                break
+        return added
+
 
 
     def __contains__(self, id_: str) -> bool:
