@@ -1,37 +1,40 @@
+import re
+
+
 def re_word() -> str:
     """Dopasowanie: ciąg "al" w dowolnym miejscu łańcucha
     """
-    raise NotImplementedError
+    return r'al'
 
 
 def re_begin() -> str:
     """Dopasowanie: ciąg "al" na początku łańcucha
     """
-    raise NotImplementedError
+    return r'^al'
 
 
 def re_end() -> str:
     """Dopasowanie: ciąg "st" na końcu łańcucha
     """
-    raise NotImplementedError
+    return r'st$'
 
 
 def re_wildchar() -> str:
     """Dopasowanie: wszystkie znaki począwszy od '=' do końca linii
     """
-    raise NotImplementedError
+    return r'=.*'
 
 
 def re_n_alnums() -> str:
     """Dopasowanie: ciąg (dokładnie) czterech znaków alfanumerycznych
     """
-    raise NotImplementedError
+    return r'\w{4}'
 
 
 def re_binary() -> str:
     """Dopasowanie: ciąg składający się z cyfr 0 lub 1 (dowolnej długości)
     """
-    raise NotImplementedError
+    return r'(0|1)+'
 
 
 def re_mobile() -> str:
@@ -43,4 +46,4 @@ def re_mobile() -> str:
        dowolna liczba spacji
      - "główny" numer to ciąg 9 cyfr (bez żadnych znaków rozdzielających)
     """
-    raise NotImplementedError
+    return r'(\+\d{2,3}\s*\d{9})|(^\d{9})'

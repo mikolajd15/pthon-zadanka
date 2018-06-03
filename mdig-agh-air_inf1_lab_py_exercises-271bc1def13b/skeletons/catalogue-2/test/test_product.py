@@ -41,11 +41,7 @@ class TestProduct(unittest.TestCase):
         with self.assertRaises(ValueError):
             Product(id_="RB01", name="Robot with a remote control", price=10)
 
-    def test_create_from_str(self):
-        self.assertEqual(
-            Product(id_="RB 1", name="Toy robot", price=10.3),
-            Product.from_string("id=RB 1;name=Toy robot;price=10.3")
-        )
+
 
 
 if __name__ == '__main__':
